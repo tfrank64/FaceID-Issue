@@ -3,7 +3,6 @@
 //  FaceSample
 //
 //  Created by Franklin, Taylor on 10/19/17.
-//  Copyright © 2017 Visa. All rights reserved.
 //
 
 import UIKit
