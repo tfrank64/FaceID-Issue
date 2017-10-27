@@ -1,25 +1,33 @@
-//
-//  ViewController.swift
-//  FaceSample
-//
-//  Created by Franklin, Taylor on 10/19/17.
-//  Copyright © 2017 Visa. All rights reserved.
-//
-
 import UIKit
+import LocalAuthentication
 
 class ViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(authenticationWithTouchID))
+        self.view.addGestureRecognizer(gesture)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
 }
 
+extension ViewController {
+    
+    @objc func authenticationWithTouchID() {
+        
+        let localAuthenticationContext = LAContext()
+        if localAuthenticationContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
+            
+            localAuthenticationContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "To access secure data") { success, evaluateError in
+                
+                if success {
+                    print("Success")
+                } else {
+                    print("Face ID Error")
+                    let context = LAContext()
+                    let status = context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
+                    print("Status: \(status)")
+                }
+            }
+        }
+    }
+}
