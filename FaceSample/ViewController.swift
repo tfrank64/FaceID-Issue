@@ -19,10 +19,10 @@ extension ViewController {
             
             localAuthenticationContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "To access secure data") { success, evaluateError in
                 
-                if success {
+                if false {
                     print("Success")
                 } else {
-                    print("Face ID Error")
+                    print("Error")
                     let context = LAContext()
                     let status = context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
                     print("Status: \(status)")
